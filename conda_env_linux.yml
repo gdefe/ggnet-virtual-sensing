@@ -8,7 +8,7 @@ channels:
 dependencies:
   - python=3.10
   - pytorch>=2.0.0
-  - pytorch-cuda=11.7
+  - pytorch-cuda
   - pyg
   - pytorch-scatter
   - pytorch-sparse
