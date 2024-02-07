@@ -48,7 +48,7 @@ model: ???
 
 
 #### Training params ##########################################################
-epochs: 2
+epochs: 500
 patience: 30    
 limit_train_batches: 1.0   
 limit_val_batches: 1.0     

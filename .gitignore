@@ -1,16 +1,14 @@
 # ignore all files in any directory of those directories
 logs/
+datamodules/
 tsl/
+__accessory_files/
 
 # data
-!data/
-data/NASA_data/*
-!data/NASA_data/
-data/Photovoltaic/*
-!data/Photovoltaic/
-
-datamodules/*
-!datamodules/
+data/NASA_data/clm*
+data/Photovoltaic/photo*
+!data/Photovoltaic/photovoltaic50_s.pkl
+!data/Photovoltaic/photovoltaic50_dist.npy
 
 
 # specific files
