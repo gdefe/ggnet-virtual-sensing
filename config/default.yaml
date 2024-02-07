@@ -1,11 +1,11 @@
 #### Logger params ########################################################
 # wandb:
 #    name: ${runname}-${dataset.name}-${model.name}
-#    project: VirtualSensing-Multivariate
-#    offline: True
+#    project: ???
+#    offline: False
 #    save_dir: logs/virtual_sensing/${runname}/${dataset.name}/${model.name}/seed${seed}
 #    experimet:
-#        entity: gdefe 
+#        entity: ??? 
 
 
 #### Imputation params ########################################################
