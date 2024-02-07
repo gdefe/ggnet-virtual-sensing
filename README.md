@@ -15,6 +15,7 @@ conda activate ggnet
 
 
 2) install torch spatiotemporal
+
 open a terminal in the directory where the 'README.txt' is located
 ```
 git clone https://github.com/TorchSpatiotemporal/tsl.git
