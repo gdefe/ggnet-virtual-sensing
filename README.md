@@ -1,6 +1,7 @@
-# GgNet
-Official repository for the paper "Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations" (ICLR 2024)
+# Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations (ICLR 2024)
+Code implementation and official repository for the paper "Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations" (ICLR 2024)
 
+**Authors**: [Giovanni De Felice](mailto:gdefe@liverpool.ac.uk), Andrea Cini, Daniele Zambon, Vladimir Gusev, Cesare Alippi
 
 Guidelines for executing the code.
 tested with Python 3.10 on Ubuntu 22.04.3 LTS
