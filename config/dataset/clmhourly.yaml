@@ -1,0 +1,6 @@
+name: clmHourly    
+root_dir: 'data/NASA_data'
+connectivity:
+    method: distance
+    threshold: 3500   # 0.58 = maximum to have at least 1 neighbor
+    layout: edge_index

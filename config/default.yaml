@@ -1,0 +1,72 @@
+#### Logger params ########################################################
+# wandb:
+#    name: ${runname}-${dataset.name}-${model.name}
+#    project: VirtualSensing-Multivariate
+#    offline: True
+#    save_dir: logs/virtual_sensing/${runname}/${dataset.name}/${model.name}/seed${seed}
+#    experimet:
+#        entity: gdefe 
+
+
+#### Imputation params ########################################################
+p_fault:   0.0
+p_noise:   0.0
+
+val_size: 0.1    # % of validation sensors
+test_size: 0.2   # % of testing sensors
+custom_vs_train: [] # list of tuples, those nodes/channel pairs will be in the train
+custom_vs_val:   []   # list of tuples, those nodes/channel pairs will be in the val
+custom_vs_test:  []   # list of tuples, those nodes/channel pairs will be in the test
+
+in_sample: True
+
+whiten_prob: ???           # mask points for training (specified in each model config)
+whiten_prob_vs: ???        # mask channels for training (specified in each model config)
+prediction_loss_weight: 1.0
+impute_only_missing: False
+warm_up_steps: 0
+
+
+
+#### Dataset params ###########################################################
+dataset: ???
+
+
+
+#### Windowing params #########################################################
+window: 24         # lenght of window in each batch
+# horizon: window  # length of the target sequence (e.g., forecasting horizon)
+# delay: -window   # number of steps between the window’s end and the target sequence’s beginning.
+stride: 1          # number of steps between a sample and the next one.
+window_lag: 1      # window’s sampling frequency (in number of time steps) 
+# horizon_lag: window_lag (1)  # horizon’s sampling frequency (in number of time steps)
+
+
+
+#### Model params #############################################################
+model: ???
+
+
+#### Training params ##########################################################
+epochs: 2
+patience: 30    
+limit_train_batches: 1.0   
+limit_val_batches: 1.0     
+limit_test_batches: 1.0    
+batch_size: 32             # n miniwindows in one batch
+#sampler: Null   # 'random' / 'groups' / None
+#sample_n_nodes: 120       # 120    n nodes in one miniwindow
+ 
+grad_clip_val: 5
+scale_target: True
+optimizer:
+  name: Adam
+  hparams:
+    lr: 0.001
+    weight_decay: 0
+lr_scheduler:
+  name: CosineAnnealingLR
+  hparams:
+      eta_min: 0.0001
+      T_max: ${ epochs }
+     

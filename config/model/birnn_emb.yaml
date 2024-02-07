@@ -1,0 +1,27 @@
+name: birnn_emb
+hparams:
+    rnn_hidden_size: 64
+    embedding_size: 16
+    exog_size: 0
+
+    n_rnn_layers: 1
+    cat_emb_rnn:  True
+    cell: 'gru'
+    concat_mask: True
+    detach_input: False
+    cat_states_layers: False
+
+    readout_mode: 'mlp'
+    n_mlp_layers: 1
+    mlp_hidden_size: 64
+    mlp_activation: 'relu'
+    cat_emb_out:  True
+
+whiten_prob: 0.05
+whiten_prob_vs: 0.3
+whiten_weight: 5.
+
+reg_emb: False
+    
+pinball: True
+pinball_qs: [0.159, 0.5, 0.841]

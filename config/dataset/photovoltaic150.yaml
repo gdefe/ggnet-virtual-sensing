@@ -1,0 +1,6 @@
+name: photovoltaic150
+root_dir: 'data/Photovoltaic'
+connectivity:
+    method: distance
+    threshold: 430   # to have 10 neighbours in average
+    layout: edge_index

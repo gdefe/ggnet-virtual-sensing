@@ -1,0 +1,36 @@
+name: saits
+hparams:
+  input_with_mask: True
+  n_groups: 6    # num of layer groups
+  n_group_inner_layers: 1  # num of group-inner layers
+  param_sharing_strategy: 'inner_group'    # how to share parameters, inner_group/between_group
+  d_model: 64    # model hidden dim
+  d_inner: 64    # hidden size of feed forward layer
+  n_head: 6      # head num of self-attention
+  d_time: 24
+  d_k: 64   # key dim
+  d_v: 64    # value dim
+  dropout: 0.   # dropout rate
+  diagonal_attention_mask: True  # whether to apply diagonal attention mask
+
+  MIT: False   # whether to have Masked Imputation Task (MIT) in training
+  ORT: False   # whether to have Observed Reconstruction Task (ORT) in training
+
+  device: 'cuda'
+
+whiten_prob: 0.05
+whiten_prob_vs: 0.3
+whiten_weight: 5.
+
+pinball: False
+
+# SAITS grid
+# [n_groups, d_model==d_inner, n_head]
+# [2,  32, 2]
+# [2,  32, 4]
+# [4,  64, 4]
+# [6,  64, 6]
+# [4, 128, 4]
+# [6, 128, 6]   (* clmDaily)
+# [4, 256, 4]
+# [4, 512, 4]   (* clmHourly)

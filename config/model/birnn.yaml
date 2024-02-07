@@ -1,0 +1,19 @@
+name: birnn
+hparams:
+    hidden_size: 64
+    cell: 'gru'
+    concat_mask: True
+    detach_input: False
+    n_layers: 1
+    cat_states_layers: False
+
+    readout_mode: 'mlp'
+    n_mlp_layers: 1
+    mlp_hidden_size: 64
+    mlp_activation: 'relu'
+
+whiten_prob: 0.05
+whiten_prob_vs: 0.3
+whiten_weight: 5.
+
+pinball: False

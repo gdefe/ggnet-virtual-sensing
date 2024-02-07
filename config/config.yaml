@@ -1,0 +1,32 @@
+    
+#### Experiment params ########################################################
+runname: test--${now:%Y-%m-%d}--${now:%H-%M-%S}   # specific name of the run
+group: test-${dataset.name}-${model.name}     # name of the group
+do_predict: False    # if True, the model is used to predict all cannels at all locations, and results saved
+custom: False        # if True, recreate the datamodule and do not save it
+
+# seeds
+seed: 1
+sampling_seed: 1   # photovoltaic only
+
+# remove data for robustness testing
+remove_data_frac: 0.0
+remove_vs_frac: 0.0
+
+# resources params
+workers: 0     # 64
+# num_threads: 1
+
+hydra:
+    mode: RUN
+    run:
+        dir: logs/virtual_sensing/${runname}/${dataset.name}/${model.name}/seed${seed}
+            
+datamodule_name: ${dataset.name}-${batch_size}-${p_fault}-${p_noise}-va${val_size}-te${test_size}-s${seed}
+save_dir: logs/virtual_sensing/${runname}/${dataset.name}/${model.name}/seed${seed}
+
+defaults:
+    - _self_
+    - default
+    - dataset: photovoltaic50   # clmdaily / clmhourly / aqchina / physionet2012 / photovoltaic
+    - model: ggnet

@@ -1,0 +1,17 @@
+name: brits
+hparams:
+    rnn_hidden_size: 128
+    
+whiten_prob: 0.05
+whiten_prob_vs: 0.3
+whiten_weight: 5.
+
+pinball: False
+
+# BRITS grid
+# [rnn_hidden_size]
+# [32]
+# [64]
+# [128] (* clmDaily) 
+# [256]
+# [512] (* clmHourly)

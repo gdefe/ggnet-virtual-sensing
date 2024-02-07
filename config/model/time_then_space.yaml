@@ -1,0 +1,36 @@
+name: time_then_space
+hparams:
+    rnn_hidden_size: 64
+    embedding_size: 16
+    embedding_h_size: 16
+
+    n_rnn_layers: 1
+    rnn_bidir: True
+    cat_emb_rnn:  True
+    cell: 'gru'
+    concat_mask: True
+    detach_input: False
+    cat_states_layers: False
+
+    n_conv_layers: 1
+    cat_emb_gnn:  False
+    weight_adj_gnn: True
+    gnn_mode: 'manual' 
+    gnn_root_weight_type: 'linear'   # 'identity', 'linear'
+    gnn_activation: 'tanh'  # comment for no activation 
+    gnn_dropout: 0.
+    
+    n_mlp_layers: 1
+    mlp_hidden_size: 64
+    merge_mode: 'cat'
+    mlp_activation: 'relu'
+    cat_emb_out:  True
+
+    n_clusters: 1 #18
+
+whiten_prob: 0.05
+whiten_prob_vs: 0.3
+whiten_weight: 5.
+
+pinball: True
+pinball_qs: [0.159, 0.5, 0.841]

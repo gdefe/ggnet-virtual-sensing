@@ -1,0 +1,51 @@
+    
+#### Experiment params ########################################################
+runname: test--${now:%Y-%m-%d}--${now:%H-%M-%S}   # specific name of the run
+group: test-${dataset.name}-${model.name}     # name of the group
+do_predict: False    # if True, the model is used to predict all cannels at all locations, and results saved
+custom: False        # if True, recreate the datamodule and do not save it
+
+### to fix seeds
+# seed: 1
+# sampling_seed: 1   # photovoltaic only
+
+# remove data for robustness testing
+remove_data_frac: 0.0
+remove_vs_frac: 0.0
+
+# resources params
+workers: 0     # 64
+# num_threads: 1
+
+
+hydra:
+    mode: MULTIRUN
+    sweep:
+        dir:    logs/virtual_sensing/${runname}
+        subdir: ${dataset.name}/${model.name}/seed${seed}
+    sweeper:
+        params:
+            ### to loop over seeds (climate experiments)
+            ++seed: 1,2,3,4,5
+
+            ### to loop over seeds (photovoltaic experiment)
+            # ++sampling_seed: 1,2,3,4,5
+            # ++seed: 1,2,3,4,5
+            
+            ### to loop over datasets
+            # +dataset: clmdaily, clmhourly, photovoltaic50, photovoltaic200
+
+            ### to loop over models
+            # +model: ggnet #, ggnet # rnn, birnn, birnn_emb, time_then_space #, brits, saits, grin, ggnet
+
+datamodule_name: ${dataset.name}-${batch_size}-${p_fault}-${p_noise}-va${val_size}-te${test_size}-s${seed}
+save_dir: logs/virtual_sensing/${runname}/${dataset.name}/${model.name}/seed${seed}
+
+defaults:
+    - _self_
+    - default
+    # - dataset: clmdaily   # clmdaily / clmhourly / aqchina / physionet2012 / photovoltaic
+    # - model: saits
+
+
+

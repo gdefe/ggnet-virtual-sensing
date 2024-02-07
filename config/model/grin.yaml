@@ -1,0 +1,29 @@
+name: grin
+hparams:
+    hidden_size: 64
+    ff_size: 64
+    embedding_size: 8
+    n_layers: 1
+    kernel_size: 2
+    decoder_order: 1
+    layer_norm: False
+    dropout: 0.
+    ff_dropout: 0.
+    merge_mode: 'mlp'
+
+whiten_prob: 0.05
+whiten_prob_vs: 0.3
+whiten_weight: 5.
+
+pinball: False
+pinball_qs: [0.159, 0.5, 0.841]
+
+
+# GRIN grid
+# [hidden_size, ff_size, embedding_size, dataset.connectivity.threshold (km)]
+# [32,  64,  8, 3500] 
+# [64,  64,  8, 3500] (* clmDaily) (* clmHourly)
+# [64,  64, 16, 3500]
+# [64,  64,  8, 1750]
+# [64,  64,  8, 7000]
+# [64, 128, 16, 3500] 

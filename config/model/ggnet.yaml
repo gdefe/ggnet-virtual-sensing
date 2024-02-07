@@ -1,0 +1,44 @@
+name: ggnet
+hparams:
+    hidden_size: 64 # model hidden size
+    ff_size: 64  # readout MLP hidden size
+    embedding_G_size: 16 # G embedding size
+    embedding_G_h_size: 16  # G hidden embedding size
+    embedding_g_size: 8 # g embedding size
+
+    n_TGgconv_layers: 2 # number of (TGg) blocks
+    n_MLPencoder_layers: 1 # number of layers of the readout MLP
+
+    # TGg
+    n_tconv_layers: 3 # number of temporal convolutional layers (in each block)
+    kernel_size: 3 # convolutional kernel size
+    Gconv_mode: 'single' # single or multichannel Gconv
+    dropout: 0. # dropout rate
+
+    # embeddings
+    cat_emb_G: True       # whether to concatenate the G embedding to the input
+    cat_emb_g: True       # whether to concatenate the g embedding to the input
+    n_clusters: 1         # embedding clusters (can be modified for regularization)
+
+    multi_encoder: False  # whether to use a multichannel encoder 
+    residual: True        # whether to use residual connections thoughout the model
+    mlps: False           # whether to add dense layers inside the TGg blocks
+    l_norms: True         # whether to use layer normalization
+
+whiten_prob: 0.05     # mask points for training
+whiten_prob_vs: 0.3   # mask channels for training
+whiten_weight: 5.     # weight of the whiten loss
+
+reg_emb: False # whether to regularize the embeddings
+
+pinball: True # whether to use the pinball loss
+pinball_qs: [0.159, 0.5, 0.841] # quantiles for the pinball loss
+
+
+# GgNet grid
+# [hidden_size, ff_size, multi_encoder, n_MLPencoder_layers, embedding_g_size]
+# [32, 32, False, 1, 8]
+# [64, 64, False, 1, 8]
+# [64, 64, True, 2, 16]
+# [128, 128, False, 1, 8] (* clmDaily) (* clmHourly)
+# [128, 128, True, 1, 16]
