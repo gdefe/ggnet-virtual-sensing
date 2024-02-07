@@ -38,5 +38,6 @@ One dataset with 50 nodes is provided in the code.
   
 5) choose setting, e.g., number of epochs, in `default.yaml`
 
+(optional) to enable logging, uncomment and personalize the wandb configurations into `default.yaml`
 
 6) run the code:  `python run_train.py config=config`
