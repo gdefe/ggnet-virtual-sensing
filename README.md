@@ -1,4 +1,7 @@
 # Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations (ICLR 2024)
+
+[![PDF](https://img.shields.io/badge/%E2%87%A9-PDF-orange.svg?style=flat-square)](https://openreview.net/forum?id=CAqdG2dy5s&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICLR.cc%2F2024%2FConference%2FAuthors%23your-submissions))
+
 Code implementation and official repository for the paper "Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations" (ICLR 2024)
 
 **Authors**: [Giovanni De Felice](mailto:gdefe@liverpool.ac.uk), Andrea Cini, Daniele Zambon, Vladimir Gusev, Cesare Alippi
