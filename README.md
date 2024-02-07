@@ -25,7 +25,7 @@ pip install -e .
 
 
 3) create datasets:
-- daily climate: use the script `data/NASA_data/build_dataset.py`. This will download data from the API. Then save the output into `data/NASA_data/clmDaily.pkl` or `data/NASA_data/clmHourly.pkl` (may take some time to complete)
+- climate: use the script `data/NASA_data/build_dataset.py`. This will download data from the API. Then save the output into `data/NASA_data/clmDaily.pkl` or `data/NASA_data/clmHourly.pkl` (may take some time to complete)
   
 - photovoltaic: First, install install xarray: `pip install xarray`. Download `coordinates.nc` and `module_00.tar.gz` (~86 Gb) from https://scholarsphere.psu.edu/resources/dacba268-d084-4e0e-a674-670217c59891 and place both into the `data/Photovoltaic` folder. Finally, modify and use the script `data/Photovoltaic/build_dataset.py`.
 One dataset with 50 nodes is provided in the code. 
