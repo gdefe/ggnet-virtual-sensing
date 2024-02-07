@@ -30,10 +30,13 @@ pip install -e .
 - photovoltaic: First, install install xarray: `pip install xarray`. Download `coordinates.nc` and `module_00.tar.gz` (~86 Gb) from https://scholarsphere.psu.edu/resources/dacba268-d084-4e0e-a674-670217c59891 and place both into the `data/Photovoltaic` folder. Finally, modify and use the script `data/Photovoltaic/build_dataset.py`.
 One dataset with 50 nodes is provided in the code. 
 
-4) choose model and dataset in 'config.yaml'
+- feel free to contact me for support or requesting built datasets
+
+
+4) choose model and dataset in `config.yaml`
 
   
-5) choose setting, e.g., number of epochs, in 'default.yaml'
+5) choose setting, e.g., number of epochs, in `default.yaml`
 
 
-6) run the code:  'python run_train.py config=config'
+6) run the code:  `python run_train.py config=config`
