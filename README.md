@@ -44,4 +44,4 @@ One dataset with 50 nodes is provided in the code.
 
 (optional) to enable logging, uncomment and personalize the wandb configurations into `default.yaml`
 
-6) run the code:  `python run_train.py config=config`
+6) run the code:  `python run.py config=config`
