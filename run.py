@@ -25,26 +25,26 @@ from tsl.utils.casting import torch_to_numpy
 
 # my modifications to tsl
 # datasets
-from my_tsl.datasets.climate_capitals import ClimateCapitals
-from my_tsl.datasets.photovoltaic import Photovoltaic
+from virtual_sensing.datasets.climate_capitals import ClimateCapitals
+from virtual_sensing.datasets.photovoltaic import Photovoltaic
 # mask and splitter
-from my_tsl.imputation import add_virtual_sensors
-from my_tsl.imputation_dataset import ImputationDataset
-from my_tsl.nodewise_splitter import nodewise_index
+from virtual_sensing.imputation import add_virtual_sensors
+from virtual_sensing.imputation_dataset import ImputationDataset
+from virtual_sensing.nodewise_splitter import nodewise_index
 # baselines
-from my_tsl.imputer import Imputer
+from virtual_sensing.imputer import Imputer
 from tsl.nn.models.temporal.rnn_imputers_models import RNNImputerModel
-from my_tsl.models.baselines.birnn import BiRNNImputerModel
-from my_tsl.models.baselines.rnnemb import RNNImputerEmbModel
-from my_tsl.models.baselines.birnnemb import BiRNNImputerEmbModel
-from my_tsl.models.baselines.time_then_space import TimeThenSpaceModel
-from my_tsl.models.baselines.brits import BRITSModel
-from my_tsl.models.baselines.saits import SAITSModel
+from virtual_sensing.models.baselines.birnn import BiRNNImputerModel
+from virtual_sensing.models.baselines.rnnemb import RNNImputerEmbModel
+from virtual_sensing.models.baselines.birnnemb import BiRNNImputerEmbModel
+from virtual_sensing.models.baselines.time_then_space import TimeThenSpaceModel
+from virtual_sensing.models.baselines.brits import BRITSModel
+from virtual_sensing.models.baselines.saits import SAITSModel
 from tsl.nn.models.stgn.grin_model import GRINModel
-from my_tsl.models.ggnet import GGNetModel
+from virtual_sensing.models.ggnet import GGNetModel
 
 # metrics
-from my_tsl.my_metrics import MultivariateMaskedMRE, MaskedVRE, MaskedPinballLoss
+from virtual_sensing.my_metrics import MultivariateMaskedMRE, MaskedVRE, MaskedPinballLoss
 
 # utils imports 
 from torch_geometric.utils import to_dense_adj

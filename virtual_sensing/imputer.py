@@ -8,7 +8,7 @@ from torchmetrics import Metric
 
 from tsl.engines.predictor import Predictor
 
-from my_tsl.node_sampler import sample_nodes #,sample_nodes_groups, sample_nodes_rnd
+from virtual_sensing.node_sampler import sample_nodes #,sample_nodes_groups, sample_nodes_rnd
 from utils import baselines_loss, format_output, unpack_output  
 
 class Imputer(Predictor):

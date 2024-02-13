@@ -7,7 +7,7 @@ from einops import rearrange
 from tsl.utils.casting import torch_to_numpy
 from tsl.metrics import numpy as numpy_metrics
 
-from my_tsl.imputation import prediction_dataframe
+from virtual_sensing.imputation import prediction_dataframe
 
 
 def format_output(output):

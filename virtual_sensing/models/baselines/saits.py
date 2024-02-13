@@ -28,7 +28,7 @@ from einops import rearrange
 
 from tsl.nn.models.base_model import BaseModel
 
-from my_tsl.models.assets.saits_layers import *
+from virtual_sensing.models.assets.saits_layers import *
 
 
 class SAITSModel(BaseModel):

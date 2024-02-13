@@ -14,11 +14,11 @@ from tsl.nn.layers.norm import LayerNorm
 from tsl.nn.layers.base import Dense
 from tsl.nn.layers.multi.conv import MultiTemporalConv
 # graph
-from my_tsl.models.assets.embeddings import ClusterizedNodeEmbedding
-from my_tsl.models.assets.my_graph_conv import myGraphConv
+from virtual_sensing.models.assets.embeddings import ClusterizedNodeEmbedding
+from virtual_sensing.models.assets.my_graph_conv import myGraphConv
 # mlp
 from tsl.nn.blocks import MLP
-from my_tsl.models.assets.multi_mlp import MultiMLP
+from virtual_sensing.models.assets.multi_mlp import MultiMLP
 
 
 def cat_all(*args):

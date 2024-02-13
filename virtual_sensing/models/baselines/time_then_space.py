@@ -12,12 +12,12 @@ from tsl.nn.blocks import MLP
 from tsl.nn.models.base_model import BaseModel
 
 # time
-from my_tsl.models.assets.rnn_encoders_embeddings import RNNI_withEmb
+from virtual_sensing.models.assets.rnn_encoders_embeddings import RNNI_withEmb
 
 # space
-from my_tsl.models.assets.my_graph_conv import myGraphConv
+from virtual_sensing.models.assets.my_graph_conv import myGraphConv
 from tsl.nn.utils import get_functional_activation
-from my_tsl.models.assets.embeddings import ClusterizedNodeEmbedding
+from virtual_sensing.models.assets.embeddings import ClusterizedNodeEmbedding
 # from tsl.nn.layers.base import NodeEmbedding
 from tsl.nn.layers.graph_convs import GraphConv, GatedGraphNetwork
 

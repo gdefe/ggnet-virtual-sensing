@@ -1,20 +1,20 @@
 from typing import Optional, Union
 
 import torch
-from torch import Tensor, nn
+from torch import Tensor
 from torch_geometric.typing import OptTensor
 from einops import rearrange, repeat
 
-from tsl.nn.blocks import MLP
 from tsl.nn.models.base_model import BaseModel
 
 # embeddings
 from tsl.nn.layers.base.embedding import NodeEmbedding
 
 # time
-from my_tsl.models.assets.rnn_encoders_embeddings import RNNI_withEmb
+from virtual_sensing.models.assets.rnn_encoders_embeddings import RNNI_withEmb
 
-class BiRNNImputerEmbModel(BaseModel):
+
+class RNNImputerEmbModel(BaseModel):
 
     """
     Args:
@@ -60,14 +60,8 @@ class BiRNNImputerEmbModel(BaseModel):
 
                  n_nodes: Optional[int] = None,
                  
-                 readout_mode: str = 'mlp',
-                 n_mlp_layers: int = 1,
-                 mlp_hidden_size: int = 128,
-                 mlp_activation = 'relu',
-                 cat_emb_out: bool = True,
-
                  pinball: bool = False):
-        super(BiRNNImputerEmbModel, self).__init__()
+        super(RNNImputerEmbModel, self).__init__()
 
         self.input_size = input_size
         self.rnn_hidden_size = rnn_hidden_size
@@ -78,67 +72,38 @@ class BiRNNImputerEmbModel(BaseModel):
         self.concat_mask = concat_mask
         self.detach_input = detach_input
 
-        self.readout_mode = readout_mode
-        self.cat_emb_out = cat_emb_out
-
         self.pinball = pinball
 
         #### embeddings #### 
         self.emb = NodeEmbedding(n_nodes, embedding_size)
 
         #### time component #### 
-        self.fwd_rnn = RNNI_withEmb(input_size=input_size,
-                                    hidden_size=rnn_hidden_size,
-                                    exog_size=exog_size,
-                                    embedding_size=embedding_size,
-                                    cell=cell,
-                                    concat_mask=concat_mask,
-                                    concat_embeddings=cat_emb_rnn,
-                                    n_layers=n_rnn_layers,
-                                    detach_input=detach_input,
-                                    cat_states_layers=cat_states_layers,
-                                    dropout=0.0)  
-        self.bwd_rnn = RNNI_withEmb(input_size=input_size,
-                                    hidden_size=rnn_hidden_size,
-                                    exog_size=exog_size,
-                                    embedding_size=embedding_size,
-                                    cell=cell,
-                                    concat_mask=concat_mask,
-                                    concat_embeddings=cat_emb_rnn,
-                                    flip_time=True,
-                                    n_layers=n_rnn_layers,
-                                    detach_input=detach_input,
-                                    cat_states_layers=cat_states_layers,
-                                    dropout=0.0)
-        hidden_size = 2 * rnn_hidden_size * (n_rnn_layers if cat_states_layers else 1)
-
-        if readout_mode == 'linear':
-            self.readout = nn.Linear(hidden_size + embedding_size if cat_emb_out else hidden_size, 
-                                     3 * input_size if pinball else input_size)
-        elif readout_mode == 'mlp':
-            #### MLP decoder #### 
-            # one single decoder
-            self.readout = MLP(input_size = hidden_size + embedding_size if cat_emb_out else hidden_size,
-                               hidden_size = mlp_hidden_size,
-                               output_size = 3 * input_size if pinball else input_size,
-                               activation = mlp_activation,
-                               n_layers = n_mlp_layers)
-        else:
-            raise ValueError(f'Unknown readout mode: {readout_mode}')
-
+        self.rnn = RNNI_withEmb(input_size = input_size,
+                                hidden_size = rnn_hidden_size,
+                                exog_size = exog_size,
+                                embedding_size = embedding_size,
+                                cell = cell,
+                                concat_mask = concat_mask,
+                                concat_embeddings = cat_emb_rnn,
+                                n_layers = n_rnn_layers,
+                                detach_input = detach_input,
+                                cat_states_layers = cat_states_layers,
+                                dropout=0.0)
+        if pinball:
+            self.readout = torch.nn.Linear(rnn_hidden_size, 3 * input_size)
 
     def forward(self,
                 x: Tensor,
                 mask: OptTensor = None,
                 sampled_idx = [],
-                u: Optional[Tensor] = None) -> Union[Tensor, list]:
+                u: Optional[Tensor] = None,) -> Union[Tensor, list]:
         """"""
         # x: [batch, time, nodes, features]
         batches, steps, nodes, features = x.size()
         # sample embeddings from node indices
         if sampled_idx: embs = self.emb()[sampled_idx, :]
         else:           embs = self.emb()
-        
+
         # prepare inputs for RNN
         x = rearrange(x, f'b t n f -> (b n) t f')
         mask = rearrange(mask, f'b t n f -> (b n) t f')
@@ -153,22 +118,14 @@ class BiRNNImputerEmbModel(BaseModel):
         ########################################
         # Time component                       #
         ########################################
-        _, h_fwd, _ = self.fwd_rnn(x, mask, embs_rnn, u)
-        _, h_bwd, _ = self.bwd_rnn(x, mask, embs_rnn, u)
-
-        h_rnn = torch.cat([h_fwd, h_bwd], axis = -1)
-
-        ########################################
-        # Readout                              #
-        ########################################  
-        if self.cat_emb_out:
-            h_rnn = torch.cat([h_rnn, repeat(embs_rnn, f'b f -> b t f', t = steps)], axis = -1)
-        x_hat = self.readout(h_rnn)
-
-        x_hat = rearrange(x_hat, f'(b n) t f -> b t n f', b = batches)
+        x_hat, h_out, _ = self.rnn(x, mask, embs_rnn, u)
+        
         if self.pinball:
+            h_out = rearrange(h_out, f'(b n) t f -> b t n f', b = batches)
+            x_hat = self.readout(h_out)
             x_hat = list(torch.split(x_hat, features, dim = -1))
         else:
+            x_hat = rearrange(x_hat, f'(b n) t f -> b t n f', b = batches)
             x_hat = [x_hat]
 
         return [x_hat, []]
@@ -180,6 +137,6 @@ class BiRNNImputerEmbModel(BaseModel):
                 u: Optional[Tensor] = None) -> Tensor:
         """"""
         return self.forward(x = x, 
-                            mask = mask,
+                            mask = mask, 
                             sampled_idx = sampled_idx,
                             u = u)
