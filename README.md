@@ -1,13 +1,19 @@
 # Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations (ICLR 2024)
 
-[![PDF](https://img.shields.io/badge/%E2%87%A9-PDF-orange.svg?style=flat-square)](https://openreview.net/forum?id=CAqdG2dy5s&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICLR.cc%2F2024%2FConference%2FAuthors%23your-submissions))
-
-Code implementation and official repository for the paper "Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations" (ICLR 2024)
+[![ICLR](https://img.shields.io/badge/ICLR-2022-blue.svg?style=flat-square)](https://openreview.net/forum?id=CAqdG2dy5s)
+[![PDF](https://img.shields.io/badge/%E2%87%A9-PDF-orange.svg?style=flat-square)](https://openreview.net/pdf?id=CAqdG2dy5s)
+[![arXiv](https://img.shields.io/badge/arXiv-2402.12598-b31b1b.svg?style=flat-square)](https://arxiv.org/abs/2402.12598)
 
 **Authors**: [Giovanni De Felice](mailto:gdefe@liverpool.ac.uk), Andrea Cini, Daniele Zambon, Vladimir Gusev, Cesare Alippi
 
+Code and official repository for the paper "Graph-based Virtual Sensing from Sparse and Partial Multivariate Observations". In this paper, we propose a graph-based methodology for tackling virtual sensing in a sparse and multivariate setting.
+The present code implementation is based on [Torch Spatiotemporal](https://github.com/TorchSpatiotemporal/tsl), a library built to accelerate research on neural spatiotemporal data processing methods.
+
+
+
+
 Guidelines for executing the code.
-tested with Python 3.10 on Ubuntu 22.04.3 LTS
+(Tested with Python 3.10 on Ubuntu 22.04.3 LTS)
 
 
 1) install dependencies:
